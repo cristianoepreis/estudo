@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (planoEnsino(); as planoEnsinoRef) {
+      <div>
+        <h2 data-cy="planoEnsinoDetailsHeading"><span jhiTranslate="sistemaEscolarApp.planoEnsino.detail.title">Plano Ensino</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">Código</span></dt>
+          <dd>
+            <span>{{ planoEnsinoRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="sistemaEscolarApp.planoEnsino.ementa">Ementa</span></dt>
+          <dd>
+            <span>{{ planoEnsinoRef.ementa }}</span>
+          </dd>
+          <dt><span jhiTranslate="sistemaEscolarApp.planoEnsino.bibliografiaBasica">Bibliografia Basica</span></dt>
+          <dd>
+            <span>{{ planoEnsinoRef.bibliografiaBasica }}</span>
+          </dd>
+          <dt><span jhiTranslate="sistemaEscolarApp.planoEnsino.bibliografiaComplementar">Bibliografia Complementar</span></dt>
+          <dd>
+            <span>{{ planoEnsinoRef.bibliografiaComplementar }}</span>
+          </dd>
+          <dt><span jhiTranslate="sistemaEscolarApp.planoEnsino.praticaLaboratorial">Pratica Laboratorial</span></dt>
+          <dd>
+            <span>{{ planoEnsinoRef.praticaLaboratorial }}</span>
+          </dd>
+          <dt><span jhiTranslate="sistemaEscolarApp.planoEnsino.disciplina">Disciplina</span></dt>
+          <dd>
+            @if (planoEnsino()!.disciplina) {
+              <div>
+                <a [routerLink]="['/disciplina', planoEnsino()!.disciplina?.id, 'view']">{{ planoEnsinoRef.disciplina?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="sistemaEscolarApp.planoEnsino.professorResponsavel">Professor Responsavel</span></dt>
+          <dd>
+            @if (planoEnsino()!.professorResponsavel) {
+              <div>
+                <a [routerLink]="['/professor', planoEnsino()!.professorResponsavel?.id, 'view']">{{
+                  planoEnsinoRef.professorResponsavel?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
+        </button>
+
+        <button type="button" [routerLink]="['/plano-ensino', planoEnsinoRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

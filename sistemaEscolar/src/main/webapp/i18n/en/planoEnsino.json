@@ -1,0 +1,29 @@
+{
+  "sistemaEscolarApp": {
+    "planoEnsino": {
+      "home": {
+        "title": "Plano Ensinos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Plano Ensino",
+        "createOrEditLabel": "Create or edit a Plano Ensino",
+        "notFound": "No Plano Ensinos found"
+      },
+      "created": "A new Plano Ensino is created with identifier {{ param }}",
+      "updated": "A Plano Ensino is updated with identifier {{ param }}",
+      "deleted": "A Plano Ensino is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Plano Ensino {{ id }}?"
+      },
+      "detail": {
+        "title": "Plano Ensino"
+      },
+      "id": "ID",
+      "ementa": "Ementa",
+      "bibliografiaBasica": "Bibliografia Basica",
+      "bibliografiaComplementar": "Bibliografia Complementar",
+      "praticaLaboratorial": "Pratica Laboratorial",
+      "disciplina": "Disciplina",
+      "professorResponsavel": "Professor Responsavel"
+    }
+  }
+}

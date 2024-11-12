@@ -1,0 +1,25 @@
+{
+  "annotations": {
+    "changelogDate": "20241025114654"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    }
+  ],
+  "name": "Curso",
+  "relationships": [
+    {
+      "otherEntityName": "disciplina",
+      "otherEntityRelationshipName": "curso",
+      "relationshipName": "disciplinas",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -1,0 +1,178 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-plano-ensino-heading"
+        data-cy="PlanoEnsinoCreateUpdateHeading"
+        jhiTranslate="sistemaEscolarApp.planoEnsino.home.createOrEditLabel"
+      >
+        Criar ou editar Plano Ensino
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="sistemaEscolarApp.planoEnsino.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let ementaRef = editForm.get('ementa')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_ementa" jhiTranslate="sistemaEscolarApp.planoEnsino.ementa">Ementa</label>
+          <input type="text" class="form-control" name="ementa" id="field_ementa" data-cy="ementa" formControlName="ementa" />
+          @if (ementaRef.invalid && (ementaRef.dirty || ementaRef.touched)) {
+            <div>
+              @if (editForm.get('ementa')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">O campo é obrigatório.</small>
+              }
+              @if (editForm.get('ementa')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '2000' }"
+                  >Este campo não pode ter mais de 2000 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let bibliografiaBasicaRef = editForm.get('bibliografiaBasica')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_bibliografiaBasica" jhiTranslate="sistemaEscolarApp.planoEnsino.bibliografiaBasica"
+            >Bibliografia Basica</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="bibliografiaBasica"
+            id="field_bibliografiaBasica"
+            data-cy="bibliografiaBasica"
+            formControlName="bibliografiaBasica"
+          />
+          @if (bibliografiaBasicaRef.invalid && (bibliografiaBasicaRef.dirty || bibliografiaBasicaRef.touched)) {
+            <div>
+              @if (editForm.get('bibliografiaBasica')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">O campo é obrigatório.</small>
+              }
+              @if (editForm.get('bibliografiaBasica')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '2000' }"
+                  >Este campo não pode ter mais de 2000 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let bibliografiaComplementarRef = editForm.get('bibliografiaComplementar')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_bibliografiaComplementar"
+            jhiTranslate="sistemaEscolarApp.planoEnsino.bibliografiaComplementar"
+            >Bibliografia Complementar</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="bibliografiaComplementar"
+            id="field_bibliografiaComplementar"
+            data-cy="bibliografiaComplementar"
+            formControlName="bibliografiaComplementar"
+          />
+          @if (bibliografiaComplementarRef.invalid && (bibliografiaComplementarRef.dirty || bibliografiaComplementarRef.touched)) {
+            <div>
+              @if (editForm.get('bibliografiaComplementar')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">O campo é obrigatório.</small>
+              }
+              @if (editForm.get('bibliografiaComplementar')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '2000' }"
+                  >Este campo não pode ter mais de 2000 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let praticaLaboratorialRef = editForm.get('praticaLaboratorial')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_praticaLaboratorial" jhiTranslate="sistemaEscolarApp.planoEnsino.praticaLaboratorial"
+            >Pratica Laboratorial</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="praticaLaboratorial"
+            id="field_praticaLaboratorial"
+            data-cy="praticaLaboratorial"
+            formControlName="praticaLaboratorial"
+          />
+          @if (praticaLaboratorialRef.invalid && (praticaLaboratorialRef.dirty || praticaLaboratorialRef.touched)) {
+            <div>
+              @if (editForm.get('praticaLaboratorial')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">O campo é obrigatório.</small>
+              }
+              @if (editForm.get('praticaLaboratorial')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '2000' }"
+                  >Este campo não pode ter mais de 2000 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_disciplina" jhiTranslate="sistemaEscolarApp.planoEnsino.disciplina">Disciplina</label>
+          <select
+            class="form-control"
+            id="field_disciplina"
+            data-cy="disciplina"
+            name="disciplina"
+            formControlName="disciplina"
+            [compareWith]="compareDisciplina"
+          >
+            <option [ngValue]="null"></option>
+            @for (disciplinaOption of disciplinasSharedCollection; track $index) {
+              <option [ngValue]="disciplinaOption">{{ disciplinaOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_professorResponsavel" jhiTranslate="sistemaEscolarApp.planoEnsino.professorResponsavel"
+            >Professor Responsavel</label
+          >
+          <select
+            class="form-control"
+            id="field_professorResponsavel"
+            data-cy="professorResponsavel"
+            name="professorResponsavel"
+            formControlName="professorResponsavel"
+            [compareWith]="compareProfessor"
+          >
+            <option [ngValue]="null"></option>
+            @for (professorOption of professorsSharedCollection; track $index) {
+              <option [ngValue]="professorOption">{{ professorOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Salvar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

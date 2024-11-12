@@ -1,0 +1,31 @@
+{
+  "annotations": {
+    "changelogDate": "20241025114655"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    }
+  ],
+  "name": "Disciplina",
+  "relationships": [
+    {
+      "otherEntityName": "professor",
+      "relationshipName": "professorResponsavel",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "curso",
+      "otherEntityRelationshipName": "disciplinas",
+      "relationshipName": "curso",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

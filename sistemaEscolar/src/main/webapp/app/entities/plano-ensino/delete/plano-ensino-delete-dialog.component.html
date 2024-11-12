@@ -1,0 +1,28 @@
+@if (planoEnsino) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(planoEnsino.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="planoEnsinoDeleteDialogHeading" jhiTranslate="entity.delete.title">Confirme a exclusão</h4>
+    </div>
+
+    <div class="modal-body">
+      <jhi-alert-error></jhi-alert-error>
+      <p
+        id="jhi-delete-planoEnsino-heading"
+        jhiTranslate="sistemaEscolarApp.planoEnsino.delete.question"
+        [translateValues]="{ id: planoEnsino.id }"
+      >
+        Tem certeza de que deseja excluir Plano Ensino {{ planoEnsino.id }}?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+      </button>
+
+      <button id="jhi-confirm-delete-planoEnsino" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times"></fa-icon>&nbsp;<span jhiTranslate="entity.action.delete">Excluir</span>
+      </button>
+    </div>
+  </form>
+}

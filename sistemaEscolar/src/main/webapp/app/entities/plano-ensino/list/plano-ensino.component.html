@@ -1,0 +1,138 @@
+<div>
+  <h2 id="page-heading" data-cy="PlanoEnsinoHeading">
+    <span jhiTranslate="sistemaEscolarApp.planoEnsino.home.title">Plano Ensinos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="sistemaEscolarApp.planoEnsino.home.refreshListLabel">Atualizar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-plano-ensino"
+        [routerLink]="['/plano-ensino/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="sistemaEscolarApp.planoEnsino.home.createLabel">Criar novo Plano Ensino</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (planoEnsinos?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="sistemaEscolarApp.planoEnsino.home.notFound">Nenhum Plano Ensino encontrado</span>
+    </div>
+  }
+
+  @if (planoEnsinos && planoEnsinos.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">Código</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="ementa">
+              <div class="d-flex">
+                <span jhiTranslate="sistemaEscolarApp.planoEnsino.ementa">Ementa</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="bibliografiaBasica">
+              <div class="d-flex">
+                <span jhiTranslate="sistemaEscolarApp.planoEnsino.bibliografiaBasica">Bibliografia Basica</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="bibliografiaComplementar">
+              <div class="d-flex">
+                <span jhiTranslate="sistemaEscolarApp.planoEnsino.bibliografiaComplementar">Bibliografia Complementar</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="praticaLaboratorial">
+              <div class="d-flex">
+                <span jhiTranslate="sistemaEscolarApp.planoEnsino.praticaLaboratorial">Pratica Laboratorial</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="disciplina.id">
+              <div class="d-flex">
+                <span jhiTranslate="sistemaEscolarApp.planoEnsino.disciplina">Disciplina</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="professorResponsavel.id">
+              <div class="d-flex">
+                <span jhiTranslate="sistemaEscolarApp.planoEnsino.professorResponsavel">Professor Responsavel</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (planoEnsino of planoEnsinos; track trackId(planoEnsino)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/plano-ensino', planoEnsino.id, 'view']">{{ planoEnsino.id }}</a>
+              </td>
+              <td>{{ planoEnsino.ementa }}</td>
+              <td>{{ planoEnsino.bibliografiaBasica }}</td>
+              <td>{{ planoEnsino.bibliografiaComplementar }}</td>
+              <td>{{ planoEnsino.praticaLaboratorial }}</td>
+              <td>
+                @if (planoEnsino.disciplina) {
+                  <div>
+                    <a [routerLink]="['/disciplina', planoEnsino.disciplina.id, 'view']">{{ planoEnsino.disciplina.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (planoEnsino.professorResponsavel) {
+                  <div>
+                    <a [routerLink]="['/professor', planoEnsino.professorResponsavel.id, 'view']">{{
+                      planoEnsino.professorResponsavel.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/plano-ensino', planoEnsino.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Visualizar</span>
+                  </a>
+
+                  <a [routerLink]="['/plano-ensino', planoEnsino.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(planoEnsino)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Excluir</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

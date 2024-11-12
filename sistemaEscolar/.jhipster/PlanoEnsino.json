@@ -1,0 +1,48 @@
+{
+  "annotations": {
+    "changelogDate": "20241025114656"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "ementa",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "2000"
+    },
+    {
+      "fieldName": "bibliografiaBasica",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "2000"
+    },
+    {
+      "fieldName": "bibliografiaComplementar",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "2000"
+    },
+    {
+      "fieldName": "praticaLaboratorial",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "2000"
+    }
+  ],
+  "name": "PlanoEnsino",
+  "relationships": [
+    {
+      "otherEntityName": "disciplina",
+      "relationshipName": "disciplina",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "professor",
+      "relationshipName": "professorResponsavel",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

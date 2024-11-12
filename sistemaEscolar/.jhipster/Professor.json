@@ -1,0 +1,17 @@
+{
+  "annotations": {
+    "changelogDate": "20241025114653"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    }
+  ],
+  "name": "Professor",
+  "relationships": [],
+  "searchEngine": "no"
+}
